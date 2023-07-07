@@ -14,5 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Expone el puerto 5000 para acceder a la aplicación Flask
 EXPOSE 8000
 
-
 CMD ["gunicorn", "login_rest.wsgi:application", "-c", "gunicorn.conf.py"]
