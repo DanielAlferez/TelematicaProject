@@ -1,0 +1,3 @@
+version: 1
+build_command: docker build -t telematica .
+run_command: docker run -p $PORT:8000 telematica
