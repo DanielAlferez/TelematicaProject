@@ -1,3 +1,5 @@
+FROM python:3.9-slim
+
 # Establecer el directorio de trabajo en /app
 WORKDIR /app
 
