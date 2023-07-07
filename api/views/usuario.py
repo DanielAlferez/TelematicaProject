@@ -14,33 +14,36 @@ from rest_framework.decorators import authentication_classes
 @permission_classes([IsAuthenticated & IsAdminUser])
 class UsuarioViewSet(ViewSet):
     
-    # def update(self, request, pk=None):
-    #     data_keys = request.data.keys()
-    #     if ('email' in data_keys,
-    #         'password' in data_keys,
-    #         'nombre' in data_keys,
-    #         'apellido' in data_keys,
-    #         'telefono' in data_keys,
-    #         'texto' in data_keys,
-    #         'cedula' in data_keys
-    #         ):
-    #         try:
-    #             usuario = Usuario.objects.get(email_usuario=request.data.get('email'))
+    def update(self, request, pk=None):
+        data_keys = request.data.keys()
+        if ('email' in data_keys,
+            'nombre' in data_keys,
+            'apellido' in data_keys,
+            'telefono' in data_keys,
+            'texto' in data_keys,
+            'cedula' in data_keys
+            ):
+            try:
+                usuario = Usuario.objects.get(email_usuario=request.data.get('email'))
 
 
-    #             usuario.set_password(request.data.get('password'))
-    #             persona.nombres_persona = request.data.get('name')
-    #             persona.apellidos_persona = request.data.get('lastname')
-    #             persona.telefono_persona = request.data.get('phone')
+                #usuario.set_password(request.data.get('password'))
+                usuario.nombres_persona = request.data.get('nombre')
+                usuario.apellidos_persona = request.data.get('apellido')
+                usuario.telefono_persona = request.data.get('telefono')
+                #usuario.email_persona = request.data.get('email')
+                usuario.texto = request.data.get('texto')
+                usuario.cedula_persona = request.data.get('cedula')
 
-    #             usuario.save()
-    #             persona.save()
 
-    #             return Response({'message':'Se actualizo informacion correctamente'}, status=status.HTTP_200_OK)
-    #         except Usuario.DoesNotExist:
-    #             return Response({'message':'El email no se encuentra en uso'}, status=status.HTTP_404_NOT_FOUND)
+                usuario.save()
 
-    #     return Response({'message': 'campos requeridos: email, password, name, lastname, phone'}, status=status.HTTP_400_BAD_REQUEST)
+
+                return Response({'message':'Se actualizo informacion correctamente'}, status=status.HTTP_200_OK)
+            except Usuario.DoesNotExist:
+                return Response({'message':'El email no se encuentra en uso'}, status=status.HTTP_404_NOT_FOUND)
+
+        return Response({'message': 'campos requeridos: email, apellidos, nombres, telefono, email, texto, cedula'}, status=status.HTTP_400_BAD_REQUEST)
 
     def create(self, request):
         data_keys = request.data.keys()
